@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evolução de Vendas por Mês</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Evolução de Vendas por Mês</h1>
+        <div id="grafico" style="width:100%; height:80vh;"></div>
+    </div>
+
+    <script>
+        // Data for the chart
+        const months = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+
+        const data = {
+            "2023": [0, 0, 161.12, 212.7, 245.2, 483.34, 503.34, 604.68, 945.68, 990.68, 1181.68, 1545.45],
+            "2024": [0, 0, 116.5, 226.3, 231.62, 548.09, 564.59, 676.49, 923.49, 998.49, 1213.99, 1213.99],
+            "2025": [37.5, 62.5, 156.0, 241.7, 291.2, 291.2, 291.2, 291.2, 291.2, 291.2, 291.2, 291.2]
+        };
+
+        // Create traces for each year
+        const traces = [
+            {
+                x: months,
+                y: data["2023"],
+                mode: 'lines+markers',
+                name: '2023',
+                line: {color: '#FFA500', width: 3},
+                marker: {size: 8},
+                hovertemplate: "<b>%{x}</b><br>Valor: $%{y:.2f} Mil<extra>2023</extra>"
+            },
+            {
+                x: months,
+                y: data["2024"],
+                mode: 'lines+markers',
+                name: '2024',
+                line: {color: '#1E3F66', width: 3},
+                marker: {size: 8},
+                hovertemplate: "<b>%{x}</b><br>Valor: $%{y:.2f} Mil<extra>2024</extra>"
+            },
+            {
+                x: months,
+                y: data["2025"],
+                mode: 'lines+markers',
+                name: '2025',
+                line: {color: '#00BFFF', width: 3},
+                marker: {size: 8},
+                hovertemplate: "<b>%{x}</b><br>Valor: $%{y:.2f} Mil<extra>2025</extra>"
+            }
+        ];
+
+        // Layout configuration
+        const layout = {
+            title: {
+                text: "<b>Evolução de Vendas por Mês</b>",
+                font: {size: 24}
+            },
+            xaxis: {
+                title: "<b>Mês</b>",
+                tickangle: -30,
+                gridcolor: 'rgba(0,0,0,0.1)'
+            },
+            yaxis: {
+                title: "<b>Valor Acumulado (Mil USD)</b>",
+                gridcolor: 'rgba(0,0,0,0.1)'
+            },
+            hoverlabel: {
+                bgcolor: "rgba(0,0,0,0.8)",
+                font: {size: 14, color: "white"}
+            },
+            legend: {
+                title: "<b>Ano</b>",
+                orientation: "h",
+                yanchor: "bottom",
+                y: 1.02,
+                xanchor: "right",
+                x: 1
+            },
+            plot_bgcolor: 'white',
+            paper_bgcolor: 'white',
+            margin: {l: 50, r: 50, b: 80, t: 90, pad: 4}
+        };
+
+        // Create the plot
+        Plotly.newPlot('grafico', traces, layout);
+
+        // Add responsive behavior
+        window.addEventListener('resize', function() {
+            Plotly.Plots.resize('grafico');
+        });
+    </script>
+</body>
+</html>
